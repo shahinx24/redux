@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="count">Count: 0</p>
+    <button id="inc">Increment</button>
+
+    <script src="https://unpkg.com/redux@4.2.1/dist/redux.js"></script>
+    <script>
+    // Action creator
+    const increment = () => ({
+        type: "INC",
+        payload: 1
+    });
+
+    // Reducer
+    const counterReducer = (state = 0, action) => {
+        switch (action.type) {
+        case "INC":
+            return state + action.payload;
+        default:
+            return state;
+        }
+    };
+
+    // Store (VERY IMPORTANT)
+    const store = Redux.createStore(counterReducer);
+
+    // UI update function
+    const render = () => {
+        document.getElementById("count").innerText =
+        "Count: " + store.getState();
+    };
+
+    // Initial render
+    render();
+
+    // Subscribe UI to store
+    store.subscribe(render);
+
+    // Button click → dispatch action
+    document.getElementById("inc").addEventListener("click", () => {
+        store.dispatch(increment());
+    });
+    </script>
+</body>
+</html>

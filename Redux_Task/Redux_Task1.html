@@ -41,7 +41,7 @@
     const countEl = document.getElementById("count");
     const inc = document.getElementById("inc");
     const dec = document.getElementById("dec");
-    const rest = document.getElementById("reset");
+    const reset = document.getElementById("reset");
 
     // 5. Render UI
     function render() {
@@ -58,7 +58,7 @@
     dec.addEventListener("click", () => {
       store.dispatch({ type: "DEC" });
     });
-    rest.addEventListener("click", () => {
+    reset.addEventListener("click", () => {
       store.dispatch({ type: "RESET" });
     });
 
