@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Redux_Task_1</title>
+  <title>Redux_Task_1.0</title>
 </head>
 
 <body>
@@ -51,15 +51,9 @@
     // 6. Subscribe to store
     store.subscribe(render);
 
-    const increment = ()=>{
-        return { type: "INC" }
-    }
-    const decrement = ()=>{
-        return { type: "DEC" }
-    }
-    const rest = ()=>{
-        return { type: "RESET" }
-    }
+    const increment = ()=> ({ type: "INC" })
+    const decrement = ()=> ({ type: "DEC" })
+    const resetAction = ()=> ({ type: "RESET" })
 
     // 7. Dispatch actions on click
     inc.addEventListener("click", () => {
@@ -69,7 +63,7 @@
       store.dispatch(decrement());
     });
     reset.addEventListener("click", () => {
-      store.dispatch(rest());
+      store.dispatch(resetAction());
     });
 
     // Initial render
