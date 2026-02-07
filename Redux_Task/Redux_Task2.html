@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="count">Count: 0</p>
+    <button id="inc"> + </button>
+
+    <p id="user">LOGOUT</p>
+    <button id="btn">Logout</button>
+</body>
+    <script src="https://unpkg.com/redux@4.2.1/dist/redux.js"></script>
+<script>
+    const initState = { count: 0 };
+
+    function CountReducer(state = initState, action) {
+        switch (action.type) {
+        case "INC":
+            return { count: state.count + 1 };
+        default:
+            return state;
+        }
+    }
+
+    const userInit = { loggedIn: false };
+    function LoginReducer(state = userInit, action) {
+        switch (action.type) {
+        case "LOGIN":
+            return { loggedIn: true };
+        case "LOGOUT":
+            return userInit;
+        default:
+            return state;
+        }
+    }
+
+    const rootReducer = Redux.combineReducers({
+        counter: CountReducer,
+        user: LoginReducer
+    });
+
+    const store = Redux.createStore(rootReducer);
+
+    const countEl = document.getElementById("count");
+    const userEl = document.getElementById("user");
+    const inc = document.getElementById("inc");
+    const btn = document.getElementById("btn");
+
+    function render() {
+        const state = store.getState();
+
+        countEl.textContent = "Count: " + state.counter.count;
+        userEl.textContent = "Logged In: " + state.user.loggedIn;
+    }
+
+    const 
+
+    inc.addEventListener("click", () => {
+        store.dispatch({ type: "INC" });
+    });
+
+    btn.addEventListener("click", () => {
+        store.dispatch({ type: "LOGIN" });
+    });
+
+    store.subscribe(render);
+    render();
+</script>
+</html>
