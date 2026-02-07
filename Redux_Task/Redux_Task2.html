@@ -56,14 +56,15 @@
         userEl.textContent = "Logged In: " + state.user.loggedIn;
     }
 
-    const 
+    const status = ()=>({type: "LOGIN"})
+    const increment = ()=>({type: "INC"})
 
     inc.addEventListener("click", () => {
-        store.dispatch({ type: "INC" });
+        store.dispatch(increment());
     });
 
     btn.addEventListener("click", () => {
-        store.dispatch({ type: "LOGIN" });
+        store.dispatch(status());
     });
 
     store.subscribe(render);
