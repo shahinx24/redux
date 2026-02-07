@@ -61,7 +61,9 @@
         btn.textContent = state.user.loggedIn ? "Logout" : "Login";
     }
 
-    const status = () => ({ type: "LOGIN" })
+    const increment = () => ({ type: "INC" })
+    const login = () => ({ type: "LOGIN" });
+    const logout = () => ({ type: "LOGOUT" });
 
     inc.addEventListener("click", () => {
         store.dispatch(increment());
