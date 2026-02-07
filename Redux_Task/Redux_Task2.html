@@ -58,18 +58,20 @@
 
         countEl.textContent = "Count: " + state.counter.count;
         userEl.textContent = "Logged In: " + state.user.loggedIn;
+        btn.textContent = state.user.loggedIn ? "Logout" : "Login";
     }
 
     const status = () => ({ type: "LOGIN" })
-    const increment = () => ({ type: "INC" })
 
     inc.addEventListener("click", () => {
         store.dispatch(increment());
     });
 
     btn.addEventListener("click", () => {
-        store.dispatch(status());
+        const loggedIn = store.getState().user.loggedIn;
+        store.dispatch(loggedIn ? logout() : login());
     });
+
 
     store.subscribe(render);
     render();
