@@ -1,16 +1,14 @@
-import { configureStore, applyMiddleware, compose } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../features/counter/counterSlice";
-import logger from "../app/loggerMiddleware";
+import logger from "./loggerMiddleware";
 
-// Enable Redux DevTools
-const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = configureStore(
-  counterReducer,
-  composeEnhancers(
-    applyMiddleware(logger)
-  )
-);
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(logger),
+  devTools: true,
+});
 
 export default store;
