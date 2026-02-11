@@ -2,17 +2,22 @@ import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 
 export const todosAdapter = createEntityAdapter()
 
-const initialState = todosAdapter.getInitialState()
+const initialState = todosAdapter.getInitialState({
+  nextId: 1,
+})
 
 const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
     todoAdded: {
-      reducer: todosAdapter.addOne,
-      prepare: (title) => ({
+      reducer: (state, action) => {
+        todosAdapter.addOne(state, action.payload)
+        state.nextId += 1
+      },
+      prepare: (title, id) => ({
         payload: {
-          id: Date.now().toString(),
+          id,
           title,
           completed: false,
         },
