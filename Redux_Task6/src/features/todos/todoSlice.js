@@ -21,7 +21,7 @@ export const fetchTodos = createAsyncThunk(
   }
 )
 
-const todosSlice = createSlice({
+const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
@@ -49,6 +49,6 @@ export const {
   todoAdded,
   todoUpdated,
   todoRemoved,
-} = todosSlice.actions
+} = todoSlice.actions
 
-export default todosSlice.reducer
+export default todoSlice.reducer

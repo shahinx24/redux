@@ -1,12 +1,12 @@
 import { createSelector } from 'reselect'
-import { todosAdapter } from './todosSlice'
+import { todosAdapter } from './todoSlice'
 
-const selectTodosState = (state) => state.todos
+const selectTodoState = (state) => state.todos
 
 export const {
   selectAll: selectAllTodos,
   selectById: selectTodoById,
-} = todosAdapter.getSelectors(selectTodosState)
+} = todosAdapter.getSelectors(selectTodoState)
 
 export const selectCompletedTodos = createSelector(
   [selectAllTodos],
