@@ -10,20 +10,18 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    todoAdded: {
-      reducer: (state, action) => {
-        todosAdapter.addOne(state, action.payload)
-        state.nextId += 1
-      },
-      prepare: (title, id) => ({
-        payload: {
-          id,
-          title,
-          completed: false,
-        },
-      }),
+    todoAdded: (state, action) => {
+      todosAdapter.addOne(state, {
+        id: state.nextId,
+        title: action.payload,
+        completed: false,
+      })
+
+      state.nextId += 1
     },
+
     todoUpdated: todosAdapter.updateOne,
+
     todoRemoved: todosAdapter.removeOne,
   },
 })
