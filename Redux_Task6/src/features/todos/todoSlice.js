@@ -1,47 +1,25 @@
-import {
-  createSlice,
-  createEntityAdapter,
-  createAsyncThunk,
-} from '@reduxjs/toolkit'
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 
-const todosAdapter = createEntityAdapter()
+export const todosAdapter = createEntityAdapter()
 
-const initialState = todosAdapter.getInitialState({
-  status: 'idle',
-  error: null,
-})
+const initialState = todosAdapter.getInitialState()
 
-export const fetchTodos = createAsyncThunk(
-  'todos/fetchTodos',
-  async () => {
-    const response = await fetch(
-      'https://jsonplaceholder.typicode.com/todos?_limit=5'
-    )
-    return await response.json()
-  }
-)
-
-const todoSlice = createSlice({
+const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    todoAdded: todosAdapter.addOne,
+    todoAdded: {
+      reducer: todosAdapter.addOne,
+      prepare: (title) => ({
+        payload: {
+          id: Date.now().toString(),
+          title,
+          completed: false,
+        },
+      }),
+    },
     todoUpdated: todosAdapter.updateOne,
     todoRemoved: todosAdapter.removeOne,
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchTodos.pending, (state) => {
-        state.status = 'loading'
-      })
-      .addCase(fetchTodos.fulfilled, (state, action) => {
-        state.status = 'succeeded'
-        todosAdapter.setAll(state, action.payload)
-      })
-      .addCase(fetchTodos.rejected, (state, action) => {
-        state.status = 'failed'
-        state.error = action.error.message
-      })
   },
 })
 
@@ -49,6 +27,6 @@ export const {
   todoAdded,
   todoUpdated,
   todoRemoved,
-} = todoSlice.actions
+} = todosSlice.actions
 
-export default todoSlice.reducer
+export default todosSlice.reducer

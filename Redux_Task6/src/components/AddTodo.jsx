@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { todoAdded } from '../features/todos/todosSlice'
+import { todoAdded } from '../features/todos/todoSlice'
 
 const AddTodo = () => {
   const [title, setTitle] = useState('')
@@ -8,26 +8,18 @@ const AddTodo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!title.trim()) return
 
-    if (title.trim()) {
-      dispatch(
-        todoAdded({
-          id: Date.now().toString(),
-          title,
-          completed: false,
-        })
-      )
-      setTitle('')
-    }
+    dispatch(todoAdded(title))
+    setTitle('')
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Add a new todo..."
+        placeholder="Add todo..."
       />
       <button type="submit">Add</button>
     </form>

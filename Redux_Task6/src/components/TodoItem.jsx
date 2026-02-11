@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux'
 import {
   todoUpdated,
   todoRemoved,
-} from '../features/todos/todosSlice'
+} from '../features/todos/todoSlice'
 
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch()
@@ -21,7 +21,7 @@ const TodoItem = ({ todo }) => {
   }
 
   return (
-    <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+    <div style={{ display: 'flex', gap: '10px' }}>
       <span
         onClick={handleToggle}
         style={{
@@ -31,7 +31,6 @@ const TodoItem = ({ todo }) => {
       >
         {todo.title}
       </span>
-
       <button onClick={handleDelete}>Delete</button>
     </div>
   )
