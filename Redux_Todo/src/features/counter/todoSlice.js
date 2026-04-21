@@ -1,24 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-export const counterSlice = createSlice({
-  name: 'counter',
+const todoSlice = createSlice({
+  name: "todo",
   initialState: {
-    value: 0
+    items: [],
   },
-  reducers: {
-    increment: (state) => {
-        // if(state.value < 10)
-      state.value += 1
+  reducer: {
+    addTodo: (state, action) => {
+      state.items.push({
+        id: Date.now(),
+        text: action.payload,
+      })
     },
-    decrement: (state) => {
-        // if(state.value > 0)
-      state.value -= 1
-    },
-    reset: (state) => {
-      state.value = 0
+    deleteTodo: (state, action) => {
+      state.item = state.items.filter(
+        (todo) => todo.id !== action.payload 
+      )
     }
   }
 })
 
-export const { increment, decrement, reset } = counterSlice.actions
-export default counterSlice.reducer
+export const { addTodo, deleteTodo } = todoSlice.actions;
+export default todoSlice.reducer;
