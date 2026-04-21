@@ -7,7 +7,6 @@ function App() {
     <>
       <User name="Shahin" age={22} />
       <User name="Hanan" age={19} />
-      <p></p>
     </>
   )
 }
